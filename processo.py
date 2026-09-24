@@ -31,6 +31,17 @@ def build_datajud_alias(parts):
         return f"api_publica_trt{number}"
     return None
 
+def has_valid_check_digit(parts):
+    check_digit = int(parts["check_digit"])
+    number_case = int(((parts["sequential_number"]) +
+                   (parts["year"]) +
+                   (parts["judiciary_branch"]) +
+                   (parts["court_code"]) +
+                   (parts["origin_unit"]) + "00"))
+
+    expected_check_digit = 98 - (number_case % 97)
+    return expected_check_digit == check_digit
+
 case_number = input("Número do processo: ").strip()
 parts = split_case_number(case_number)
 
@@ -38,6 +49,7 @@ if parts:
     print(parts)
     print(describe_case(parts))
     print(build_datajud_alias(parts))
+    print(has_valid_check_digit(parts))
 else:
     print("Número de processo inválido")
 
