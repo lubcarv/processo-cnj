@@ -42,14 +42,15 @@ def has_valid_check_digit(parts):
     expected_check_digit = 98 - (number_case % 97)
     return expected_check_digit == check_digit
 
-case_number = input("Número do processo: ").strip()
-parts = split_case_number(case_number)
+if __name__ == "__main__":
+    case_number = input("Número do processo: ").strip()
+    parts = split_case_number(case_number)
 
-if parts:
-    print(parts)
-    print(describe_case(parts))
-    print(build_datajud_alias(parts))
-    print(has_valid_check_digit(parts))
-else:
-    print("Número de processo inválido")
+    if parts:
+        print(parts)
+        print(describe_case(parts))
+        print(build_datajud_alias(parts))
+        print(has_valid_check_digit(parts))
+    else:
+        print("Número de processo inválido")
 
